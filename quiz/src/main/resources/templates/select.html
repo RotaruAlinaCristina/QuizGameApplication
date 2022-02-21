@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <title>Quiz Application</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" th:href="@{/}">Quiz Application - pick options</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <form action="#" th:action="@{/select}" th:object="${gameOptions}" method="post">
+        <div class="form-row">
+            <div class="form-group">
+                <br>
+                <h4>Questions:</h4>
+                <label for="numberOfQuestionsInput">Number: </label>
+                <<input class="form-control" name="numberOfQuestionsInput" id="numberOfQuestionsInput" th:field="*{numberOfQuestions}"
+                        type="number" min="1" max="20" step="1" value="5"/>
+            </div>
+            <div class="form-group">
+                <h4>Difficulty:</h4>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="difficulty"
+                           id="difficulty_EASY" value="EASY">
+                    <label class="form-check-label" for="difficulty_EASY">EASY</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="difficulty"
+                           id="difficulty_MEDIUM" value="MEDIUM">
+                    <label class="form-check-label" for="difficulty_MEDIUM">MEDIUM</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="difficulty"
+                           id="difficulty_HARD" value="HARD">
+                    <label class="form-check-label" for="difficulty_HARD">HARD</label>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <h4>Category:</h4>
+                        <th:block th:each="category : ${categories}">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="categoryRadioOptions"
+                                       th:id="'category_' + ${category.getId()}" th:value="${category.getId()}" th:field="*{categoryId}">
+                                <label class="form-check-label" th:for="'difficulty_' + ${category.getId()}"
+                                       th:text="${category.getName()}">
+                                </label>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Play!</button>
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Rotaru Alina <span th:text="${#dates.year(#dates.createNow())}"></span>. Template by <a href="https://startbootstrap.com/templates/scrolling-nav/">Start Bootstrap</a></p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom JavaScript for this theme -->
+<script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>
